@@ -24,11 +24,11 @@
         </dependency>
 
         <!-- jdk 1.6之前使用 -->
-        <dependency>　
-            <groupId>com.jcraft</groupId>
-            <artifactId>jzlib</artifactId>
-            <version>1.1.3</version>
-        </dependency>
+<!--        <dependency>　-->
+<!--            <groupId>com.jcraft</groupId>-->
+<!--            <artifactId>jzlib</artifactId>-->
+<!--            <version>1.1.3</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>com.google.protobuf</groupId>
