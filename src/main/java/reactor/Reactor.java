@@ -19,7 +19,7 @@ public class Reactor implements Runnable {
         selector = Selector.open();
         serverSocket = ServerSocketChannel.open();
         serverSocket.configureBlocking(false);
-        serverSocket.socket().bind(new InetSocketAddress(800));
+        serverSocket.socket().bind(new InetSocketAddress(port));
         SelectionKey register = serverSocket.register(selector, SelectionKey.OP_ACCEPT);
         register.attach(new Acceptor());
     }
