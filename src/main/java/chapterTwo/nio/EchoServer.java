@@ -9,6 +9,7 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.logging.LoggingHandler;
 
 import java.net.InetSocketAddress;
 
@@ -29,11 +30,12 @@ public class EchoServer {
 //        int port = Integer.parseInt(args[0]);
 
         // 调用服务器的start()方法
-        new EchoServer(8080).start();
+        new EchoServer(9999).start();
 
     }
 
     public void start() throws Exception {
+        final LoggingHandler loggingHandler = new LoggingHandler();
         final EchoServerHandler echoServerHandler = new EchoServerHandler();
         EventLoopGroup boss = new NioEventLoopGroup();
         EventLoopGroup work = new NioEventLoopGroup();
@@ -42,10 +44,12 @@ public class EchoServer {
             b.group(boss, work)
                     .channel(NioServerSocketChannel.class)
                     .localAddress(new InetSocketAddress(port))
+                    .handler(loggingHandler)
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
                             ch.pipeline().addLast(echoServerHandler);
+                            ch.pipeline().addLast(loggingHandler);
                         }
                     });
             ChannelFuture sync = b.bind().sync();

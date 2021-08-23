@@ -14,15 +14,15 @@ import java.net.InetSocketAddress;
 
 public class EchoClient {
 
-    private final String host;
-
-    private final int port;
-
-    public EchoClient(String host, int port) {
-        this.host = host;
-        this.port = port;
-    }
-
+//    private final String host;
+//
+//    private final int port;
+//
+//    public EchoClient(String host, int port) {
+//        this.host = host;
+//        this.port = port;
+//    }
+//
 
     public void start() throws Exception {
         // work
@@ -35,7 +35,7 @@ public class EchoClient {
             b.group(group)
                     .channel(NioSocketChannel.class)
                     // 设置绑定 或者使用 b.connect()
-                    .remoteAddress(new InetSocketAddress(host, port))
+                    .remoteAddress(new InetSocketAddress("localhost", 9999))
                     .handler(new ChannelInitializer<SocketChannel>() {
                         // 在创建Channel,向ChannelPipeline添加EchoClientHandler实例
                         @Override
@@ -55,12 +55,12 @@ public class EchoClient {
     }
 
     public static void main(String[] args) throws Exception {
-        if (args.length != 2) {
-            System.err.println("Usage:" + EchoClient.class.getSimpleName() + "<host><port>");
-            return;
-        }
-        String host = args[0];
-        int prot = Integer.parseInt(args[1]);
-        new EchoClient(host, prot).start();
+//        if (args.length != 2) {
+//            System.err.println("Usage:" + EchoClient.class.getSimpleName() + "<host><port>");
+//            return;
+//        }
+//        String host = args[0];
+//        int prot = Integer.parseInt(args[1]);
+        new EchoClient().start();
     }
 }
